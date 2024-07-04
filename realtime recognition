@@ -1,0 +1,26 @@
+import cv2
+
+classified = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
+capture = cv2.VideoCapture(0)
+def box(video):
+    gray_scale = cv2.cvtColor(video, cv2.COLOR_BGR2GRAY)
+    faces = classified.detectMultiScale(gray_scale, scaleFactor=1.1, minNeighbors=25, minSize=(10, 10))
+    for (x, y, w, h) in faces:
+        cv2.rectangle(video, (x, y), (x + w, y + h), (0, 250, 0), 4)
+    return faces
+
+while True:
+    output, frames = capture.read() 
+    if not output:
+        break  
+
+    faces = box(frames)
+
+    cv2.imshow("Real-time face detection", frames)  
+
+    if (cv2.waitKey(1) & 0xFF) == 27:
+        break
+    if cv2.getWindowProperty("Real-time face detection", cv2.WND_PROP_VISIBLE) < 1:
+        break
+capture.release()
+cv2.destroyAllWindows()

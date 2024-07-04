@@ -6,8 +6,7 @@ face_classifier = cv2.CascadeClassifier(
     cv2.data.haarcascades + "haarcascade_frontalface_default.xml"
 )
 faces = face_classifier.detectMultiScale(
-    gray_image, scaleFactor=1.1, minNeighbors=12, minSize=(40, 40)
-)
+    gray_image, scaleFactor=1.1, minNeighbors=25, minSize=(40, 40))
 for (x, y, w, h) in faces:
     cv2.rectangle(img, (x, y), (x + w, y + h), (0, 250, 0), 4)
 
