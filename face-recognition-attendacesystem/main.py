@@ -6,21 +6,14 @@ from datetime import datetime
 capture = cv2.VideoCapture(0)
 
 
-shr_image = face_recognition.load_image_file("face-recognition-attendacesystem/photos/shreeya.jpg")
-shr_encoding = face_recognition.face_encodings(shr_image)[0]
+jobs_image = face_recognition.load_image_file("face-recognition-attendacesystem/photos/SteveJobs.jpg")
+jobs_encoding = face_recognition.face_encodings(jobs_image)[0]
 
-san_image = face_recognition.load_image_file("face-recognition-attendacesystem/photos/sandhya.jpg")
-san_encoding = face_recognition.face_encodings(san_image)[0]
+gates_image = face_recognition.load_image_file("face-recognition-attendacesystem/photos/BillGates.jpg")
+gates_encoding = face_recognition.face_encodings(gates_image)[0]
 
-dee_image = face_recognition.load_image_file("face-recognition-attendacesystem/photos/deepa.jpg")
-dee_encoding = face_recognition.face_encodings(dee_image)[0]
-
-gk_image = face_recognition.load_image_file("face-recognition-attendacesystem/photos/gopakumar.jpg")
-gk_encoding = face_recognition.face_encodings(gk_image)[0]
-
-
-known_encodings = [san_encoding, shr_encoding, dee_encoding,gk_encoding]
-known_names = ["Sandhya", "Shreeya","Deepa","Gopakumar"]
+known_encodings = [jobs_encoding, gates_encoding]
+known_names = ["Steve Jobs", "Bill Gates"]
 
 while True:
     output, frame = capture.read()
@@ -37,7 +30,7 @@ while True:
         
         
         for face_encoding, face_location in zip(face_encodings, face_locations):
-            matches = face_recognition.compare_faces(known_encodings,face_encoding, tolerance=0.5)
+            matches = face_recognition.compare_faces(known_encodings,face_encoding, tolerance=0.6)
             name="Unknown"
             face_distance = face_recognition.face_distance(known_encodings,face_encoding)
             best_match_index = np.argmin(face_distance)
