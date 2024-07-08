@@ -5,13 +5,14 @@ from kivy.clock import Clock
 from kivymd.app import MDApp
 from kivymd.uix.button import MDFloatingActionButton
 from kivy.core.window import Window
+from PIL import Image
 kv = """
 FloatLayout:
     orientation: 'vertical'
     Camera:
         id: camera
         pos_hint: {'center_x': 0.5}
-        resolution: (1600, 1200)
+        resolution: (1280, 720)
         play: True
 
     MDFloatingActionButton:
@@ -35,6 +36,7 @@ class CamApp(MDApp):
         Window.bind(on_resize=self.on_window_resize)
         filename = 'capture.jpg'
         self.camera.export_to_png(filename)
+        
 
 if __name__ == "__main__":
     CamApp().run()
