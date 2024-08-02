@@ -1,6 +1,9 @@
 import cv2
 
-img = cv2.imread("family1.png")
+img = cv2.imread("family1.png") 
+if img is None:
+    print("Error: Image not found or unable to load.")
+
 gray_image = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 face_classifier = cv2.CascadeClassifier(
     cv2.data.haarcascades + "haarcascade_frontalface_default.xml"
